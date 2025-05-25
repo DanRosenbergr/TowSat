@@ -1,0 +1,15 @@
+.recordsWindow{
+  display: flex;
+  justify-content: space-evenly;
+}
+.recordButtons{
+  
+}
+.datarow {
+  border-bottom: 1px solid #000000;
+  display: flex;
+  align-items: center;
+}
+.btDel {
+  width: 50px;
+}

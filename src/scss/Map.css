@@ -1,0 +1,27 @@
+.mapContainer{
+    display: flex;
+    height: 100%;
+    
+}
+.mapButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 200px;  
+    gap: 10px;
+    padding-left: 15px;     
+}
+.mapArea{
+    flex: 1;               
+    display: flex;         
+    justify-content: center; 
+    align-items: center;     
+    /* border: 1px solid red; */
+}
+.mapleaflet{
+    height: 480px;
+    width: 800px;
+    border: 1px solid #40362D;
+
+}

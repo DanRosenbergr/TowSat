@@ -1,0 +1,137 @@
+// Přepsání Bootstrap proměnných
+$bg-dark: #40362D;
+$bg-light: #F7EDDA;
+$text-dark: #C9AF7F;
+$text-light: #F2E1AE;
+$middle-color: #8C6418;
+
+@import 'bootstrap/scss/bootstrap';
+
+// body elements HEADER, MAIN, FOOTER -------------------------------------------
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #F7EDDA;
+}
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.header{
+    height: 30px;
+    text-align: center;
+    border-bottom: 1px solid black;  
+    background-color: $bg-dark;
+    color: $text-light;
+}
+.container{
+    width: 80vw;
+    height: 600px;    
+    margin: 30px auto 20px;
+    border: 2px solid $bg-dark; 
+    padding: 0;
+    background-color: $bg-light;
+    border-radius: 8px;
+    box-shadow: 0 0 15px 8px rgba($bg-dark, 0.2);
+}
+.mainWindow{
+    height:90%;
+    width: 100%;
+    margin: 0px auto;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  display: flex;                 
+  align-items: center;         
+  justify-content: center;      
+  color: $text-light;;
+  background-color: $bg-dark;
+  font-size: 12px;
+}
+.footer p {
+  margin: 0;
+  padding: 0;
+}
+//components -------------------------------
+.home{
+
+}
+.info{
+
+}
+.upload{
+
+}
+
+.records{
+
+}
+.tables{
+  display: flex;
+  justify-content:space-evenly;
+  height:100%;
+}
+.map{
+  height: 100%;
+  width: 100%;
+}
+
+
+//MENU elements ------------------------------------------------
+.menu{
+   display: flex; 
+   height: 40px;  
+   background-color: $bg-dark;
+}
+.menuButton{  
+  flex: 1;
+  text-align: center;  
+  transition: all 0.2s ease;
+  background-color: $bg-dark;  
+}
+.menuButton button {  
+  width: 100%;      
+  cursor: pointer;
+  background-color: $bg-dark;
+  color: $bg-light;
+  border-bottom: none;
+  border-top: none;
+  border-left:1px solid $bg-dark  ;
+  border-right:1px solid$bg-dark;
+  border-radius: 8px;
+}
+.menuButton.active {
+  background-color: $bg-dark;
+  color: $text-light;
+  transform: translateY(-12px);
+  border-radius: 5px;
+}
+.menuButton.active button {
+  transition: all 0.2s ease;
+  font-weight: bold;
+  font-size: 17px;
+}
+//buttons ----------------------------------------------------------
+.myButton{
+  background-color: #40362D;
+  color: #F7EDDA;
+  border-radius: 5px;
+  border: none;
+  width:180px;
+  height: 40px;
+  margin:5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.myButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.myButton:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
