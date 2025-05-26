@@ -40,14 +40,14 @@ function Info({ btsDataFunc, gpsDataFunc }) {
               </p>          
           </div>
           <div className="infoButtons">
-            <img src="/public/signal-tower.png" alt="tower icon" className="infoIcon" />
+            <img src="/signal-tower.png" alt="tower icon" className="infoIcon" />
             <button className="myButton" onClick={loadBtsLocal}>
               sample BTS file
             </button>
             <button className="myButton" onClick={loadGpsLocal}>
               sample GPS file
             </button>
-            <img src="/public/pin-mark.png" alt="gps icon" className="infoIcon" />   
+            <img src="/pin-mark.png" alt="gps icon" className="infoIcon" />   
           </div >
             <div className="text2">
               <h4>Data Visualization</h4>

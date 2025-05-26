@@ -168,7 +168,7 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
               style={{ display: "none" }}
             />
           </div>
-          <img src="/public/signal-tower.png" alt="tower icon" className="infoIcon ms-2" />
+          <img src="/signal-tower.png" alt="tower icon" className="infoIcon ms-2" />
         </div>        
         <div className="uploadWindow">
           <p>
@@ -187,7 +187,7 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
               style={{ display: "none" }}
             />
           </div>
-          <img src="/public/pin-mark.png" alt="gps icon" className="infoIcon ms-2" />
+          <img src="/pin-mark.png" alt="gps icon" className="infoIcon ms-2" />
         </div>
         <h4>Do you want to keep the data?</h4>
         <div className="uploadWindow">          
