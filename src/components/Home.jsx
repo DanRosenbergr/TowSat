@@ -17,9 +17,9 @@ function Home() {
           </p>
         </div>
         <div className="graphics">          
-            <img src="/public/signal-tower.png" alt="tower icon" className="homeIcon" />
-             <img src="/public/map.png" alt="map" className="mapPicture" />
-             <img src="/public/pin-mark.png" alt="gps icon" className="homeIcon" />          
+            <img src="/signal-tower.png" alt="tower icon" className="homeIcon" />
+             <img src="/map.png" alt="map" className="mapPicture" />
+             <img src="/pin-mark.png" alt="gps icon" className="homeIcon" />          
         </div>
       </div>
     </>
