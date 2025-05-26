@@ -197,10 +197,10 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
           </p>
         </div>
         <div className="saveWindow">
-          <img src="/public/signal-tower.png" alt="tower icon" className="infoIcon" />
+          <img src="/signal-tower.png" alt="tower icon" className="infoIcon" />
           <button className="myButton" onClick={saveBtsData}>Save BTS data</button>
           <button className="myButton" onClick={saveGpsData}>Save GPS data</button>
-          <img src="/public/pin-mark.png" alt="gps icon" className="infoIcon" />
+          <img src="/pin-mark.png" alt="gps icon" className="infoIcon" />
         </div>
       </div>
     </>
