@@ -5,7 +5,7 @@ import axios from "axios";
 import { Routes, Route, NavLink } from "react-router-dom";
 import Info from "./components/Info.jsx";
 import Upload from "./components/Upload.jsx";
-import Home from "./components/home.jsx"
+import Home from "./components/Home.jsx"
 import Records from "./components/Records.jsx"
 import BtsTable from "./components/BtsTable.jsx";
 import GpsTable from "./components/GpsTable.jsx"
