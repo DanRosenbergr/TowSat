@@ -89,7 +89,7 @@ function App() {
       .then((response) => {
         setBtsData(response.data);
         console.log("Data v btsData:", btsData);
-        alert("Data in selected record were successfyly loaded.")
+        alert("Data in selected record were successfully loaded.")
       })
       .catch((error) => {
         console.error("chyba pri nacitani jednoho zaznamu BTS:", error);
@@ -102,7 +102,7 @@ function App() {
       .then((response) => {
         setGpsData(response.data);
         console.log("Data v GpsData:", gpsData);  
-        alert("Data in selected record were successfyly loaded.")
+        alert("Data in selected record were successfully loaded.")
       })
       .catch((error) => {
         console.error("chyba pri nacitani jednoho zaznamu GPS", error);
