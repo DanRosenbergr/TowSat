@@ -189,7 +189,9 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
           </div>
           <img src="/pin-mark.png" alt="gps icon" className="infoIcon ms-2" />
         </div>
-        <h4>Do you want to keep the data?</h4>
+        <div className="titleText">
+          <h4>Do you want to keep the data?</h4>
+        </div>
         <div className="uploadWindow">          
             <p>
             Once you've uploaded your data, you can choose to save it into the application's database.
