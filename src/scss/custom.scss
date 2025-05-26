@@ -12,6 +12,13 @@ body {
   height: 100%;
   margin: 0;
   background-color: #F7EDDA;
+  background-image: url('../../public/old-paper1.jpg');
+  background-size: cover;          
+  background-position: center;     
+  background-repeat: no-repeat;    
+}
+body p{
+  all:unset;
 }
 #root {
   min-height: 100%;
@@ -19,11 +26,13 @@ body {
   flex-direction: column;
 }
 .header{
-    height: 30px;
-    text-align: center;
-    border-bottom: 1px solid black;  
+    height: 40px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: $bg-dark;
     color: $text-light;
+    font-size: 20px;
 }
 .container{
     width: 80vw;
@@ -33,7 +42,7 @@ body {
     padding: 0;
     background-color: $bg-light;
     border-radius: 8px;
-    box-shadow: 0 0 15px 8px rgba($bg-dark, 0.2);
+    box-shadow: 0 0 15px 8px rgba($bg-dark, 0.2); 
 }
 .mainWindow{
     height:90%;
@@ -49,8 +58,7 @@ body {
   display: flex;                 
   align-items: center;         
   justify-content: center;      
-  color: $text-light;;
-  background-color: $bg-dark;
+  color: $bg-dark;;
   font-size: 12px;
 }
 .footer p {
@@ -67,9 +75,10 @@ body {
 .upload{
 
 }
-
 .records{
-
+  display: flex;
+  height:100%;
+  justify-content: center;
 }
 .tables{
   display: flex;
@@ -80,16 +89,16 @@ body {
   height: 100%;
   width: 100%;
 }
-
-
 //MENU elements ------------------------------------------------
 .menu{
    display: flex; 
    height: 40px;  
    background-color: $bg-dark;
+   margin-bottom: 10px;
 }
 .menuButton{  
   flex: 1;
+  font-size: 16px;
   text-align: center;  
   transition: all 0.2s ease;
   background-color: $bg-dark;  
@@ -98,27 +107,37 @@ body {
   width: 100%;      
   cursor: pointer;
   background-color: $bg-dark;
-  color: $bg-light;
+  color: $text-light;
   border-bottom: none;
   border-top: none;
   border-left:1px solid $bg-dark  ;
   border-right:1px solid$bg-dark;
   border-radius: 8px;
+  font-weight: normal;        // výchozí stav
+  font-size: 16px;            // výchozí stav
+  transition: font-size 0.2s ease, transform 0.2s ease;  // přechod aplikuj zde!
+  text-shadow: none; /* výchozí stav */
+}
+.menuButton button:hover{
+  transition: font-size 0.2s ease, transform 0.2s ease;
+  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  font-size: 17px;
 }
 .menuButton.active {
   background-color: $bg-dark;
   color: $text-light;
-  transform: translateY(-12px);
+  transform: translateY(-15px);
   border-radius: 5px;
 }
 .menuButton.active button {
   transition: all 0.2s ease;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 18px;
 }
 //buttons ----------------------------------------------------------
 .myButton{
-  background-color: #40362D;
+  background-color: #524437;
   color: #F7EDDA;
   border-radius: 5px;
   border: none;
@@ -128,10 +147,28 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .myButton:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .myButton:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.myButtonOff{   
+    transition: all 0.2s ease;
+    background-color: transparent;
+    color: #40362D;
+    border: 2px solid #40362D;
+    border-radius: 5px;
+    width:180px;
+    height: 40px;
+    margin:5px;
+}
+.myButtonOff:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.myButtonOff:active {
   transform: scale(0.95) translateY(2px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }

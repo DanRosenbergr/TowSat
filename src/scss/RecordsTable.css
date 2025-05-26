@@ -1,15 +1,73 @@
+.recordsFullWindow{
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  height: 100%;
+}
+.recordsTitle{
+  background-color: #524437;
+  color: #F7EDDA;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7px;
+  padding-bottom: 7px;    
+}
+.recordsList{
+  flex: 1;
+  overflow-y: auto; 
+}
 .recordsWindow{
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%; 
+  border: 1px solid #524437;
+  box-shadow: 0 0 10px 5px rgba(82, 68, 55, 0.2); 
+  border-radius: 5px; 
 }
-.recordButtons{
-  
+.recordsButtons{
+  padding: 10px; 
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 .datarow {
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #524437;
   display: flex;
   align-items: center;
+  margin: 5px 15px;
+  padding: 5px 0;
+  transition: font-size 0.2s ease, transform 0.2s ease;
 }
-.btDel {
-  width: 50px;
+.datarow:hover{
+  font-size: larger;
+  cursor: pointer;
+  transition: font-size 0.2s ease, transform 0.2s ease;
 }
+.selected{
+  border-bottom: 2px solid #524437;
+  display: flex;
+  align-items: center;
+  margin: 5px 15px;
+  font-size: larger;
+  background-color: #C9AF7F;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: font-size 0.2s ease, transform 0.2s ease;
+}
+.selected:hover{
+  cursor: pointer;
+}
+.myButtonDisabled{   
+    transition: all 0.2s ease;
+    background-color: transparent;
+    color: #40362D;
+    border: 2px solid #40362D;
+    border-radius: 5px;
+    width:180px;
+    height: 40px;
+    margin:5px;
+    cursor: not-allowed;
+    pointer-events: none; /* blokuje hover, klikání atd. */
+}
+

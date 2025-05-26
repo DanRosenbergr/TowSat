@@ -29,14 +29,20 @@ function GpsTable({ gpsData }) {
               </tr>
             </thead>
             <tbody>
-              {gpsData.length ===0 ?(<tr><td colspan="5" className="noData">! no data yet !</td></tr>):(
+              {gpsData.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="noData">
+                    ! no data yet !
+                  </td>
+                </tr>
+              ) : (
                 gpsData.map((point, index) => (
                   <tr key={index}>
-                  <td>{point.latitude}</td>
-                  <td>{point.longitude}</td>
-                  <td>{point.elevation}</td>
-                  <td>{formatGPXTime(point.time)}</td>
-                </tr>
+                    <td>{point.latitude}</td>
+                    <td>{point.longitude}</td>
+                    <td>{point.elevation}</td>
+                    <td>{formatGPXTime(point.time)}</td>
+                  </tr>
                 ))
               )}
             </tbody>

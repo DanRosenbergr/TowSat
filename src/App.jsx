@@ -31,7 +31,7 @@ function App() {
 }
   const loadBtsRecords = () => {
     axios
-      .get("http://localhost:5000/phone-tracker/btsdata")
+      .get("http://localhost:5000/phone-tracker/bts")
       // .get("https://phone-tracker-backendtest.onrender.com/btsdata")
       .then((response) => {
         setSavedRecordsBTS(response.data);
@@ -43,7 +43,7 @@ function App() {
   };
   const loadGpsRecords = () => {
     axios
-      .get("http://localhost:5000/phone-tracker/gpsdata")
+      .get("http://localhost:5000/phone-tracker/gps")
       // .get("https://phone-tracker-backendtest.onrender.com/gpsdata")
       .then((response) => {
         setSavedRecordsGPS(response.data);
@@ -56,10 +56,10 @@ function App() {
   const handleDelete = (id, type) => {
   if (type === "bts") {
     // delete BTS záznam
-    if (window.confirm("Opravdu chcete tento záznam smazat?")) {
+    if (window.confirm("Are you sure you want to delete the record?")) {
       axios
-        .delete(`http://localhost:5000/phone-tracker/btsdata/${id}`)
-        // .delete(`https://phone-tracker-backendtest.onrender.com/btsdata/${id}`)
+        .delete(`http://localhost:5000/phone-tracker/bts/${id}`)
+        // .delete(`https://phone-tracker-backendtest.onrender.com/btsdata/${recordIdGPS}`)
         .then(() => {
           loadBtsRecords();
         })
@@ -69,10 +69,10 @@ function App() {
     }
   } else if (type === "gps") {
     // delete GPS záznam
-    if (window.confirm("Opravdu chcete tento záznam smazat?")) {
+    if (window.confirm("Are you sure you want to delete the record?")) {
       axios
-        .delete(`http://localhost:5000/phone-tracker/gpsdata/${id}`)
-        // .delete(`https://phone-tracker-backendtest.onrender.com/gpsdata/${id}`)
+        .delete(`http://localhost:5000/phone-tracker/gps/${id}`)
+        // .delete(`https://phone-tracker-backendtest.onrender.com/gpsdata/${recordIdGPS}`)
         .then(() => {
           loadGpsRecords();
         })
@@ -84,12 +84,12 @@ function App() {
   };
   const loadBtsData = (IdBTS) => {
     axios
-      .get(`http://localhost:5000/phone-tracker/recordsBTS/${IdBTS}`)
-      // .get(`https://phone-tracker-backendtest.onrender.com/recordsBTS/${IdBTS}`)
+      .get(`http://localhost:5000/phone-tracker/bts/${IdBTS}`)
+      // .get(`https://phone-tracker-backendtest.onrender.com/recordsBTS/${recordIdBTS}`)
       .then((response) => {
         setBtsData(response.data);
         console.log("Data v btsData:", btsData);
-        
+        alert("Data in selected record were successfyly loaded.")
       })
       .catch((error) => {
         console.error("chyba pri nacitani jednoho zaznamu BTS:", error);
@@ -97,11 +97,12 @@ function App() {
   };
   const loadGpsData = (IdGPS) => {
     axios
-      .get(`http://localhost:5000/phone-tracker/recordsGPS/${IdGPS}`)
-      // .get(`https://phone-tracker-backendtest.onrender.com/recordsGPS/${IdGPS}`)
+      .get(`http://localhost:5000/phone-tracker/gps/${IdGPS}`)
+      // .get(`https://phone-tracker-backendtest.onrender.com/recordsGPS/${recordIdGPS}`)
       .then((response) => {
         setGpsData(response.data);
-        console.log("Data v GpsData:", gpsData);        
+        console.log("Data v GpsData:", gpsData);  
+        alert("Data in selected record were successfyly loaded.")
       })
       .catch((error) => {
         console.error("chyba pri nacitani jednoho zaznamu GPS", error);
@@ -110,51 +111,53 @@ function App() {
   return (
     <>
       <header className="header">TowSat</header>
-      <div className="container">            
+      <div className="container">
         <div className="menu">
           <NavLink className="menuButton" to="/">
-            <button >Home</button>
+            <button>Home</button>
           </NavLink>
           <NavLink className="menuButton" to="/info">
-            <button >How it works</button>
+            <button>How it works</button>
           </NavLink>
           <NavLink className="menuButton" to="/upload">
-            <button >Upload</button>
+            <button>Upload</button>
           </NavLink>
           <NavLink className="menuButton" to="/records">
             <button onClick={handleAllRecords}>Records</button>
           </NavLink>
           <NavLink className="menuButton" to="/tables">
-            <button >Data Tables</button>
-          </NavLink>       
-         
+            <button>Data Tables</button>
+          </NavLink>
+
           <NavLink className="menuButton" to="/map">
-            <button >Map</button>
+            <button>Map</button>
           </NavLink>
         </div>
         <div className="mainWindow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/info" element={<Info btsDataFunc={uploadBTSdata} gpsDataFunc={uploadGPSdata} />} />            
-            <Route path="/upload" element={<Upload btsDataFunc={uploadBTSdata} gpsDataFunc={uploadGPSdata } />} />
+            <Route path="/info" element={<Info btsDataFunc={uploadBTSdata} gpsDataFunc={uploadGPSdata} />}/>
+            <Route path="/upload" element={<Upload
+                  btsDataFunc={uploadBTSdata}
+                  gpsDataFunc={uploadGPSdata}
+                  btsData={btsData}
+                  gpsData={gpsData}/>}/>
             <Route path="/records" element={<Records
-              btsRecords={savedRecordsBTS}
-              gpsRecords={savedRecordsGPS}
-              loadBtsData={loadBtsData}
-              loadGpsData={loadGpsData}
-              handleDelete={handleDelete} />}/>
-            <Route path="/tables" element={
-              <div className="tables">
-              <BtsTable btsData={btsData} />
-              <GpsTable gpsData={gpsData} />
-              </div>
-            }/>            
-            <Route path="/map" element={<Map btsData={btsData} gpsData={gpsData} />} />
+                  btsRecords={savedRecordsBTS}
+                  gpsRecords={savedRecordsGPS}
+                  loadBtsData={loadBtsData}
+                  loadGpsData={loadGpsData}
+                  handleDelete={handleDelete}/>}/>
+            <Route path="/tables" element={<div className="tables">
+                  <BtsTable btsData={btsData} />
+                  <GpsTable gpsData={gpsData} />
+                </div>}/>
+            <Route path="/map" element={<Map btsData={btsData} gpsData={gpsData} />}/>
           </Routes>
         </div>
       </div>
       <footer className="footer">
-        <p> © D4n_b3rg 2025 </p>     
+        <p> © D4n_b3rg 2025 </p>
       </footer>
     </>
   );

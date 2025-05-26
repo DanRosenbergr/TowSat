@@ -9,16 +9,18 @@ function Records({ btsRecords, gpsRecords, loadBtsData, loadGpsData, handleDelet
   return (
     <>
       <div className="records">
-        <h4 className="text-center">Records</h4>
-        <div className="recordsWindow">
-          <div className="btsWindow">
-            <div className="btsList">
-              <p className="text-center fw-bold p-2">Saved BTS Records</p>
+        <div className="recordsFullWindow">
+          <div className="recordsWindow">
+            <div className="recordsTitle">
+              <p>Saved BTS Records</p>
+            </div>
+            <div className="recordsList">
               {btsRecords.map((item) => (
                 <div
-                  className={`ms-3 me-3 datarow d-flex justify-content-between ${selectedBtsId === item.id ? "selected" : ""}`}
+                  className={selectedBtsId === item.id ? "selected" : "datarow"}
                   key={item.id}
-                  onClick={() => setSelectedBtsId(item.id)}>
+                  onClick={() => setSelectedBtsId((prevId) => (prevId === item.id ? null : item.id))}
+                >
                   <span>{item.name}</span>
                 </div>
               ))}
@@ -27,24 +29,30 @@ function Records({ btsRecords, gpsRecords, loadBtsData, loadGpsData, handleDelet
               <button
                 onClick={() => loadBtsData(selectedBtsId)}
                 disabled={!selectedBtsId}
-                className={`btn me-3 ${selectedBtsId ? "myButton" : "btn-secondary"} btnDel`}>Load
+                className={selectedBtsId ? "myButton" : "myButtonDisabled"}
+              >
+                Load
               </button>
               <button
                 onClick={() => handleDelete(selectedBtsId, "bts")}
                 disabled={!selectedBtsId}
-                className={`btn ${selectedBtsId ? "" : "btn-secondary"} btnDel`}>Delete
+                className={selectedBtsId ? "myButton" : "myButtonDisabled"}
+              >
+                Delete
               </button>
             </div>
           </div>
-        
-          <div className="gpsWindow">
-            <div className="gpsList">
-              <p className="text-center fw-bold p-2">Saved GPS Records</p>
+          <div className="recordsWindow">
+            <div className="recordsTitle">
+              <p>Saved GPS Records</p>
+            </div>
+            <div className="recordsList">
               {gpsRecords.map((item) => (
                 <div
-                  className={`ms-3 me-3 datarow d-flex justify-content-between ${selectedGpsId === item.id ? "selected" : ""}`}
+                  className={selectedGpsId === item.id ? "selected" : "datarow"}
                   key={item.id}
-                  onClick={() => setSelectedGpsId(item.id)}>
+                  onClick={() => setSelectedGpsId((prevId) => (prevId === item.id ? null : item.id))}
+                >
                   <span>{item.name}</span>
                 </div>
               ))}
@@ -53,17 +61,21 @@ function Records({ btsRecords, gpsRecords, loadBtsData, loadGpsData, handleDelet
               <button
                 onClick={() => loadGpsData(selectedGpsId)}
                 disabled={!selectedGpsId}
-                className={`btn me-3 ${selectedGpsId ? "btn-success" : "btn-secondary"} btnDel`}>Load
+                className={selectedGpsId ? "myButton" : "myButtonDisabled"}
+              >
+                Load
               </button>
               <button
-                onClick={() => handleDelete(selectedGpsId, "bts")}
+                onClick={() => handleDelete(selectedGpsId, "gps")}
                 disabled={!selectedGpsId}
-                className={`btn ${selectedGpsId ? "btn-danger" : "btn-secondary"} btnDel`}>Delete
+                className={selectedGpsId ? "myButton" : "myButtonDisabled"}
+              >
+                Delete
               </button>
             </div>
           </div>
         </div>
-      </div>      
+      </div>
     </>
   );
 }

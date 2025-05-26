@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -22,15 +22,23 @@ const customIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-function Map({ btsData, gpsData }) {    
-const [showBTS, setShowBTS] = useState(true);
-const [showGPS, setShowGPS] = useState(true);
-    
-  //vychozi stred a zoom
-const defaultCenter = [50.0755, 14.4378]; // Praha
-const defaultZoom = 10;
+function Map({ btsData, gpsData }) {
+  const [showBTS, setShowBTS] = useState(false);
+  const [showGPS, setShowGPS] = useState(false);
 
-const firstPoint =
+  //prepinani show buttons dle exitence dat
+  useEffect(() => {
+    if (btsData && btsData.length > 0) setShowBTS(true);
+    else setShowBTS(false);
+    if (gpsData && gpsData.length > 0) setShowGPS(true);
+    else setShowGPS(false);
+  }, [gpsData, btsData]);
+
+  //vychozi stred a zoom
+  const defaultCenter = [49.8209, 18.2625]; // Ostrava
+  const defaultZoom = 10;
+
+  const firstPoint =
     (showGPS && gpsData.length && gpsData[0]) ||
     (showBTS && btsData.length && btsData[0]);
 
@@ -41,45 +49,80 @@ const firstPoint =
       ]
     : defaultCenter;
 
-const gpsCoords = gpsData
+  const gpsCoords = gpsData
     .filter((item) => item.latitude && item.longitude)
     .map((item) => [parseFloat(item.latitude), parseFloat(item.longitude)]);
 
-const validBts = btsData.filter(
+  const validBts = btsData.filter(
     (item) =>
-    item.lat &&
-    item.long &&
-    !isNaN(parseFloat(item.lat)) &&
-    !isNaN(parseFloat(item.long))
+      item.lat &&
+      item.long &&
+      !isNaN(parseFloat(item.lat)) &&
+      !isNaN(parseFloat(item.long))
   );
 
-    return (
+  return (
     <div className="map">
       <div className="mapContainer">
-        <div className="mapButtons">
-          <button className="myButton" onClick={() => setShowGPS(!showGPS)}>
-            {showGPS ? "Hide GPS" : "Show GPS"}
-          </button>
-          <button className="myButton" onClick={() => setShowBTS(!showBTS)} >
-            {showBTS ? "Hide BTS" : "Show BTS"}
-          </button>
+        <div className="mapControls">
+          <div className="mapButtons">
+            <button
+              className={
+                showGPS
+                  ? gpsData && gpsData.length > 0
+                    ? "myButton"
+                    : "myButtonOff"
+                  : "myButtonOff"
+              }
+              onClick={() => setShowGPS(!showGPS)}
+            >
+              {showGPS && gpsData && gpsData.length > 0
+                ? "Hide GPS line"
+                : "Show GPS line"}
+            </button>
+            <button
+              className={
+                showBTS
+                  ? btsData && btsData.length > 0
+                    ? "myButton"
+                    : "myButtonOff"
+                  : "myButtonOff"
+              }
+              onClick={() => setShowBTS(!showBTS)}
+            >
+              {showBTS && btsData && btsData.length > 0
+                ? "Hide BTS towers"
+                : "Show BTS towers"}
+            </button>
+          </div>
+
+          <div className="mapWarnings">
+            {showBTS && (!btsData || btsData.length === 0) && (
+              <p className="noDataMessage">No BTS data to show!</p>
+            )}
+            {showGPS && (!gpsData || gpsData.length === 0) && (
+              <p className="noDataMessage">No GPS data to show!</p>
+            )}
+          </div>
         </div>
+
         <div className="mapArea">
           <MapContainer
             center={center}
             zoom={defaultZoom}
             className="mapleaflet"
           >
-          <MapSetter center={center} />
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-              />
-              {showGPS && gpsCoords.length > 0 && (
+            <MapSetter center={center} />
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            />
+            {showGPS && gpsCoords.length > 0 && (
               <Polyline positions={gpsCoords} color="blue" weight={3} />
-              )}
-      
-          {showBTS && validBts.map((item, index) => {
+            )}
+
+            {showBTS &&
+              validBts.map((item, index) => {
                 const lat = parseFloat(item.lat);
                 const lng = parseFloat(item.long);
                 return (
@@ -106,4 +149,3 @@ const validBts = btsData.filter(
 }
 
 export default Map;
-

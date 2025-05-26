@@ -1,11 +1,7 @@
-import React, { useState } from "react";
 import axios from "axios";
 
-
-function Upload({ btsDataFunc, gpsDataFunc }) {
-  const [localBtsData, setLocalBtsData] = useState([])
-  const [localGpsData, setLocalGpsData] = useState([])
-  
+function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
+    
   const handleFileUploadBTS = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -39,8 +35,7 @@ function Upload({ btsDataFunc, gpsDataFunc }) {
       //volani funkce rodice App.jsx pro prirazeni dat
       if (btsDataFunc) {
         btsDataFunc(processedBTSData);
-      }
-      setLocalBtsData(processedBTSData)
+      }     
     };  
     reader.readAsText(file);
   };   
@@ -75,49 +70,53 @@ function Upload({ btsDataFunc, gpsDataFunc }) {
       if (gpsDataFunc) {
         gpsDataFunc(processedGPSdata);
       }
-      setLocalGpsData(processedGPSdata);
     };
     reader.readAsText(file);
   };
+
   const saveBtsData = () => {
-    if (!localBtsData.length) {
+    if (!btsData.length || !btsData) {
       console.error("Neco spatne s BTS daty");
+      alert("No BTS data to save!");
       return;
     }
-    const nameBts = prompt("Zadejte nazev zaznamu:");
+    const nameBts = prompt("Choose the name of your recording:");
     axios
-      .post("http://localhost:5000/phone-tracker/btsdata", {
+      .post("http://localhost:5000/phone-tracker/bts", {
       // .post("https://phone-tracker-backendtest.onrender.com/btsdata", {
-        data: localBtsData,
+        data: btsData,
         nameBts,
       })
       .then((response) => {
         console.log("Data uspesne odeslana:", response.data);
-        alert("Data byla úspěšně uložena!"); // Pop-up okno
+        alert("Data were successfully saved in the database."); // Pop-up okno
       })
       .catch((error) => {
         console.error("Chyba pri odesilani dat:", error);
       });
-    };
+  };
+  
   const saveGpsData = () => {
-    if (!localGpsData.length) {
+    if (!gpsData.length || !gpsData) {
       console.error("Neco spatne s GPS daty");
+      alert("No GPS data to save!");
       return;
     }
-    const nameGps = prompt("Zadejte nazev zaznamu:");
+    const nameGps = prompt("Choose the name of your recording:");
     axios
-      .post("http://localhost:5000/phone-tracker/gpsdata", {
+      .post("http://localhost:5000/phone-tracker/gps", {
       // .post("https://phone-tracker-backendtest.onrender.com/gpsdata", {
-        data: localGpsData,
+        data: gpsData,
         nameGps,
       })
       .then((response) => {
         console.log("Data spesne odeslana:", response.data);
+        alert("Data were successfully saved in the database.")
       })
       .catch((error) => {
         console.error("Chyba pri odesilani dat:", error);
       });
-  }
+    }
   return (
     <>
       <div className="upload">
