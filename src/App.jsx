@@ -31,8 +31,8 @@ function App() {
 }
   const loadBtsRecords = () => {
     axios
-      .get("http://localhost:5000/phone-tracker/bts")
-      // .get("https://phone-tracker-backendtest.onrender.com/btsdata")
+      // .get("http://localhost:5000/phone-tracker/bts")
+      .get("https://phone-tracker-backendtest.onrender.com/btsdata")
       .then((response) => {
         setSavedRecordsBTS(response.data);
         console.log("Data v savedRecordsBTS", savedRecordsBTS);        
@@ -43,8 +43,8 @@ function App() {
   };
   const loadGpsRecords = () => {
     axios
-      .get("http://localhost:5000/phone-tracker/gps")
-      // .get("https://phone-tracker-backendtest.onrender.com/gpsdata")
+      // .get("http://localhost:5000/phone-tracker/gps")
+      .get("https://phone-tracker-backendtest.onrender.com/gpsdata")
       .then((response) => {
         setSavedRecordsGPS(response.data);
         console.log("Data v savedRecordsGPS", savedRecordsGPS);        
@@ -58,8 +58,8 @@ function App() {
     // delete BTS záznam
     if (window.confirm("Are you sure you want to delete the record?")) {
       axios
-        .delete(`http://localhost:5000/phone-tracker/bts/${id}`)
-        // .delete(`https://phone-tracker-backendtest.onrender.com/btsdata/${recordIdGPS}`)
+        // .delete(`http://localhost:5000/phone-tracker/bts/${id}`)
+        .delete(`https://phone-tracker-backendtest.onrender.com/btsdata/${id}`)
         .then(() => {
           loadBtsRecords();
         })
@@ -71,8 +71,8 @@ function App() {
     // delete GPS záznam
     if (window.confirm("Are you sure you want to delete the record?")) {
       axios
-        .delete(`http://localhost:5000/phone-tracker/gps/${id}`)
-        // .delete(`https://phone-tracker-backendtest.onrender.com/gpsdata/${recordIdGPS}`)
+        // .delete(`http://localhost:5000/phone-tracker/gps/${id}`)
+        .delete(`https://phone-tracker-backendtest.onrender.com/gpsdata/${id}`)
         .then(() => {
           loadGpsRecords();
         })
@@ -82,10 +82,10 @@ function App() {
     }
   }
   };
-  const loadBtsData = (IdBTS) => {
+  const loadBtsData = (recordIdBTS) => {
     axios
-      .get(`http://localhost:5000/phone-tracker/bts/${IdBTS}`)
-      // .get(`https://phone-tracker-backendtest.onrender.com/recordsBTS/${recordIdBTS}`)
+      // .get(`http://localhost:5000/phone-tracker/bts/${recordIdBTS}`)
+      .get(`https://phone-tracker-backendtest.onrender.com/recordsBTS/${recordIdBTS}`)
       .then((response) => {
         setBtsData(response.data);
         console.log("Data v btsData:", btsData);
@@ -95,10 +95,10 @@ function App() {
         console.error("chyba pri nacitani jednoho zaznamu BTS:", error);
       });
   };
-  const loadGpsData = (IdGPS) => {
+  const loadGpsData = (recordIdGPS) => {
     axios
-      .get(`http://localhost:5000/phone-tracker/gps/${IdGPS}`)
-      // .get(`https://phone-tracker-backendtest.onrender.com/recordsGPS/${recordIdGPS}`)
+      // .get(`http://localhost:5000/phone-tracker/gps/${recordIdGPS}`)
+      .get(`https://phone-tracker-backendtest.onrender.com/recordsGPS/${recordIdGPS}`)
       .then((response) => {
         setGpsData(response.data);
         console.log("Data v GpsData:", gpsData);  

@@ -82,8 +82,8 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
     }
     const nameBts = prompt("Choose the name of your recording:");
     axios
-      .post("http://localhost:5000/phone-tracker/bts", {
-      // .post("https://phone-tracker-backendtest.onrender.com/btsdata", {
+      // .post("http://localhost:5000/phone-tracker/bts", {
+      .post("https://phone-tracker-backendtest.onrender.com/btsdata", {
         data: btsData,
         nameBts,
       })
@@ -104,8 +104,8 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
     }
     const nameGps = prompt("Choose the name of your recording:");
     axios
-      .post("http://localhost:5000/phone-tracker/gps", {
-      // .post("https://phone-tracker-backendtest.onrender.com/gpsdata", {
+      // .post("http://localhost:5000/phone-tracker/gps", {
+      .post("https://phone-tracker-backendtest.onrender.com/gpsdata", {
         data: gpsData,
         nameGps,
       })
