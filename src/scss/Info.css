@@ -1,0 +1,30 @@
+.infoText{
+    width: 90%;
+    /* text-align: center; */
+    margin-bottom: 20px;
+}
+.infoButtons{
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  gap: 20px;                
+  padding: 10px 0; 
+  border-bottom: 1px solid #40362D;  
+}
+.links{
+   display: flex;
+  justify-content: center;  
+  gap: 20px;                
+  
+}
+.infoIcon{
+    height: 30px;
+    width: auto;
+}
+.text{
+    padding: 5px 0;   
+}
+.text2{
+    padding: 10px 0;
+    border-bottom: 1px solid #40362D;
+}

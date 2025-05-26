@@ -1,13 +1,39 @@
 import axios from "axios";
+import "../scss/Upload.css"
 
 function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
     
+  function validateCSV(text) {
+  const rows = text.trim().split("\n");
+  if (rows.length < 2) return false;
+
+  const header = rows[0].split(";").map(h => h.trim().toLowerCase());
+  const requiredColumns = ["sys_time", "cid", "rssi", "tech", "arfcn", "lat", "long"];
+
+  const isHeaderValid = requiredColumns.every(col => header.includes(col));
+  return isHeaderValid;
+  }  
+  function validateGPX(gpxText) {
+  // obsahuje text tyto tagy?
+  const hasTrkpt = gpxText.includes("<trkpt");
+  const hasLat = gpxText.match(/<trkpt[^>]*lat="[^"]+"/);
+  const hasLon = gpxText.match(/<trkpt[^>]*lon="[^"]+"/);
+  const hasTime = gpxText.includes("<time>");
+  return hasTrkpt && hasLat && hasLon && hasTime;
+  }
+  
   const handleFileUploadBTS = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
       const csv = e.target.result;
+
+       // VALIDACE CSV
+      if (!validateCSV(csv)) {
+        alert("Invalid CSV format. Please upload a file exported from the correct BTS tracking app.");
+      return;
+      }
       const rows = csv.split("\n");
 
       const uniqueCells = new Set([]); // pole unikatnich hodnot
@@ -41,6 +67,11 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
   };   
   const handleFileUploadGPS = (e) => {
     const file = e.target.files[0];
+
+    if (!validateGPX(file)) {
+      alert("Invalid GPX format. Please upload a file exported from the recommended GPS tracking app.");
+      return;
+    }
     const reader = new FileReader();
 
     reader.onload = (e) => {
@@ -94,8 +125,7 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
       .catch((error) => {
         console.error("Chyba pri odesilani dat:", error);
       });
-  };
-  
+  };  
   const saveGpsData = () => {
     if (!gpsData.length || !gpsData) {
       console.error("Neco spatne s GPS daty");
@@ -120,36 +150,57 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
   return (
     <>
       <div className="upload">
-        <h3>Upload</h3>
-        <div className="btsUpload">
-          <label htmlFor="btsFile" className="myButton d-flex align-items-center justify-content-center">
-            upload BTS data here...
-          </label>
-          <input
-            type="file"
-            id="btsFile"
-            accept=".csv"
-            onChange={handleFileUploadBTS}
-            style={{ display: "none" }}
-          />
+        <h4>Upload</h4>
+        <div className="uploadWindow">
+          <p>
+            Upload a CSV file containing BTS (Base Transceiver Station) data.
+            This file must be exported from the <strong>Net Monitor</strong> app.
+          </p>
+          <div className="UploadButton">
+            <label htmlFor="btsFile" className="myButton d-flex align-items-center justify-content-center">
+              upload BTS data here...
+            </label>
+            <input
+              type="file"
+              id="btsFile"
+              accept=".csv"
+              onChange={handleFileUploadBTS}
+              style={{ display: "none" }}
+            />
+          </div>
+          <img src="/public/signal-tower.png" alt="tower icon" className="infoIcon ms-2" />
+        </div>        
+        <div className="uploadWindow">
+          <p>
+            Upload a GPX file containing GPS track data, that must be from the <strong>GPS Logger</strong> app.
+            This file contains your recorded route and positions.
+          </p>
+          <div className="UploadButton">
+            <label htmlFor="gpsFile" className="myButton d-flex align-items-center justify-content-center">
+              upload GPS data here...
+            </label>
+            <input
+              type="file"
+              id="gpsFile"
+              accept=".gpx"
+              onChange={handleFileUploadGPS}
+              style={{ display: "none" }}
+            />
+          </div>
+          <img src="/public/pin-mark.png" alt="gps icon" className="infoIcon ms-2" />
         </div>
-        <br/>
-        <div className="gpsUpload">
-          <label htmlFor="gpsFile" className="myButton d-flex align-items-center justify-content-center">
-            upload GPS data here...
-          </label>
-          <input
-            type="file"
-            id="gpsFile"
-            accept=".gpx"
-            onChange={handleFileUploadGPS}
-            style={{ display: "none" }}
-          />
+        <h4>Do you want to keep the data?</h4>
+        <div className="uploadWindow">          
+            <p>
+            Once you've uploaded your data, you can choose to save it into the application's database.
+            This allows you to access and work with the same data later without needing to re-upload the files.
+          </p>
         </div>
-        <h3>Do you want to keep the data?</h3>
         <div className="saveWindow">
+          <img src="/public/signal-tower.png" alt="tower icon" className="infoIcon" />
           <button className="myButton" onClick={saveBtsData}>Save BTS data</button>
           <button className="myButton" onClick={saveGpsData}>Save GPS data</button>
+          <img src="/public/pin-mark.png" alt="gps icon" className="infoIcon" />
         </div>
       </div>
     </>

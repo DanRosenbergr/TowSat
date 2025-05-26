@@ -47,7 +47,7 @@ body p{
 .mainWindow{
     height:90%;
     width: 100%;
-    margin: 0px auto;
+    margin: 0 auto;    
 }
 .footer{
   position: fixed;
@@ -65,15 +65,32 @@ body p{
   margin: 0;
   padding: 0;
 }
+h4, h5{
+  text-align: center;
+  color:#2f2821;
+}
 //components -------------------------------
 .home{
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  text-align: justify;
+  margin: 0 auto;
 }
 .info{
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+   margin: 0 auto;
 }
 .upload{
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }
 .records{
   display: flex;

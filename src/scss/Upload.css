@@ -1,0 +1,17 @@
+.uploadWindow{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #40362D;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+.saveWindow{
+    margin: 10px 0;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.UploadButton{
+    margin-left: 50px;
+}
