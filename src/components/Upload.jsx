@@ -15,10 +15,11 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
   }  
   function validateGPX(gpxText) {
   // obsahuje text tyto tagy?
-  const hasTrkpt = gpxText.includes("<trkpt");
-  const hasLat = gpxText.match(/<trkpt[^>]*lat="[^"]+"/);
-  const hasLon = gpxText.match(/<trkpt[^>]*lon="[^"]+"/);
+   const hasTrkpt = gpxText.includes("<trkpt");
+  const hasLat = gpxText.match(/<trkpt[^>]*lat="[^"]+"/) !== null;
+  const hasLon = gpxText.match(/<trkpt[^>]*lon="[^"]+"/) !== null;
   const hasTime = gpxText.includes("<time>");
+
   return hasTrkpt && hasLat && hasLon && hasTime;
   }
   
