@@ -67,15 +67,15 @@ function Upload({ btsDataFunc, gpsDataFunc, btsData, gpsData }) {
     reader.readAsText(file);
   };   
   const handleFileUploadGPS = (e) => {
-    const file = e.target.files[0];
-
-    if (!validateGPX(file)) {
-      alert("Invalid GPX format. Please upload a file exported from the recommended GPS tracking app.");
-      return;
-    }
+    const file = e.target.files[0];    
     const reader = new FileReader();
 
     reader.onload = (e) => {
+      const gpxText = e.target.result;
+      if (!validateGPX(gpxText)) {
+      alert("Invalid GPX format. Please upload a file exported from the recommended GPS tracking app.");
+      return;
+    }
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
 
